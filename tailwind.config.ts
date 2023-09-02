@@ -15,6 +15,11 @@ const config: Config = {
       },
     },
   },
+  textColors: {
+	'grey': '#787777',
+	'rememberry': '#1370DD',
+},
+
   plugins: [],
 }
 export default config
