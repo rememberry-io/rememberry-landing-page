@@ -1,0 +1,43 @@
+services:
+  traefik:
+    container_name: 'traefik'
+    image: traefik:3.0
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "../traefik/traefik.yml:/traefik.yml"
+      - "../traefik/dyn_config.yml:/dyn_config.yml"
+      - "../traefik/lets-encrypt.json:/acme.json"
+    networks:
+      - traefik
+  backend:
+    container_name: backend
+    build: ../palmtree/
+    environment:
+      DATABASE_URL: ${BACKEND_DATABASE_URL}
+      EXCHANGE_RATES_API_BASE: ${BACKEND_EXCHANGE_RATES_API_BASE}
+      EXCHANGE_RATES_API_KEY: ${BACKEND_EXCHANGE_RATES_API_KEY}
+    networks:
+      - palmtree
+      - traefik
+    restart: unless-stopped
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres:15.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PASS}
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - palmtree
+    restart: unless-stopped
+networks:
+  palmtree:
+  traefik:
+
+volumes:
+  postgres:
