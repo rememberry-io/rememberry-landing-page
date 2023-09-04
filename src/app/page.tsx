@@ -1,23 +1,35 @@
+'use client';
+import { useState } from 'react'
 import Image from 'next/image'
 import rememberryLogo from "../../public/rememberry-logo.svg"
 import EmbeddedFlashcard from './components/EmbeddedFlashcard'
 import Link from 'next/link'
+import SignupTooltip from './components/SignupTooltip'
 
 export default function Home() {
+	const [showTooltip, setShowTooltip] = useState(false)
+
+	const handleShowTooltip = () => {
+		setShowTooltip(true)
+		setTimeout(() => {
+			setShowTooltip(false)
+		}, 10000)
+
+	}
+
   return (
-    <main>
-      <Image src={rememberryLogo} alt='rememberryLogo' className="text-center m-auto mt-24" />
-	  	<div className='border-2 mx-24 text-center'>
-      		<h1 className='font-semibold text-3xl p-10'>Crafting <span className='text-blue-500'>flashcard journeys</span> on the fast lane. 🧠⚡️️</h1>
-      		<p>1min. survey on your learning experience to support our research - click <Link href='https://forms.gle/DVBwsM4SSzQTcysSA' className='underline'>here</Link> :) </p>
+    <main className='flex-column'>
+    	<Image src={rememberryLogo} alt='rememberryLogo' className="text-center m-auto my-20 " />
+	  	<div className='text-center my-8 sm:mb-16'>
+      		<h1 className='font-semibold mx-16 text-xl sm:text-2xl lg:text-3xl leading-loose'>Crafting <span className='text-blue-500'>flashcard journeys</span> on the fast lane. 🧠⚡️️</h1><br></br>
+      		<p className='text-xs mx-12 leading-loose px-7 text-zinc-400 text-center font-normal sm:text-base'>1min. survey on your learning experience to support our research - click <Link href='https://forms.gle/DVBwsM4SSzQTcysSA' className='underline'>here</Link> :) </p>
 		</div>
-		<div className='border-2 mx-24 text-center p-6'>
-      		<EmbeddedFlashcard />
-		</div>
-		<div className='text-center'>
+      	<EmbeddedFlashcard onFormSubmit={handleShowTooltip} />
+		<div className='text-center text-zinc-400 font-light lg:mt-10 lg:text-base text-xs mt-8 leading-loose'>
 			<p>Made with 🫐 in Berlin &lt; 3 </p>
-      		<p>Your rememberry-Team :)</p>
 		</div>
+		{showTooltip && <SignupTooltip />}
     </main>
+
   )
 }
