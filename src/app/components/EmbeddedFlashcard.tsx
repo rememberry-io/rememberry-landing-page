@@ -19,14 +19,16 @@ export default function EmbeddedFlashcard() {
   }
 
   return (
-    <article>
+    <article className='rounded-lg'>
       <Image src={traffic_light} alt='dongs' />
-      <p> Join the waitlist 👀</p>
-      <p> Sign up to be one of the first to enhance your learning experience using rememberry 🫐.</p>
-      <form onSubmit={onSubmit}>
-        <input type='email' name='email' />
-        <button type='submit'>Submit</button>
-      </form>
+      <h3 className='font-bold'> Join the waitlist 👀</h3><br></br>
+      <p> Sign up to be one of the first to enhance your learning experience using rememberry 🫐.</p><br></br>
+      <div className=''>
+        <form onSubmit={onSubmit}>
+          <input type='email' className='rounded-l border-2' placeholder='Email address' name='email' />
+          <button type='submit'>Submit</button>
+        </form>
+      </div>
     </article>
   )
 }
