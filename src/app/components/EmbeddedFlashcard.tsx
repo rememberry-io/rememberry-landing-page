@@ -1,18 +1,27 @@
 'use client';
-import Image from 'next/image'
 import { FormEvent } from 'react'
 
-export default function EmbeddedFlashcard() {
-  async function onSubmit(event: FormEvent<HTMLFormElement>){
-    event.preventDefault()
+type EmbeddedFlashcardProps = {
+	onFormSubmit: () => void // type definition for the passed function
+}
 
-    const formData = new FormData(event.currentTarget)
-    const response = await fetch('/api/submit', {
-      method: 'POST',
-      body: formData
-    })
+export default function EmbeddedFlashcard({ onFormSubmit }: EmbeddedFlashcardProps) {
 
-    const data = await response.json();
+	async function onSubmit(event: FormEvent<HTMLFormElement>){
+    	event.preventDefault()
+
+
+
+    	const formData = new FormData(event.currentTarget)
+    	const response = await fetch('/api/submit', {
+      		method: 'POST',
+      		body: formData
+    	})
+
+    	const data = await response.json();
+
+		onFormSubmit();
+
   }
 
   return (
@@ -22,11 +31,11 @@ export default function EmbeddedFlashcard() {
       	<p className='text-zinc-400 text-xs leading-6 sm:text-base sm:leading-8 pb-4'> Sign up to be one of the first to enhance your learning experience using <span className='font-bold'>rememberry</span> 🫐.</p><br className='leading-8'></br>
 	  	<div className='relative align-middle'>
 			<form onSubmit={onSubmit}>
-        		<input type='text' className='rounded-l border-1 border-b text-xs p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300' placeholder='Email address' name='email'/>
+        		<input type='email' className='rounded-l border-1 border-b text-xs p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300' placeholder='Email address' name='email'/>
         		<button className='absolute top-1/2 right-3 transform -translate-y-1/2 py-2 focus:outline-none text-xs text-zinc-400' type='submit'> -&gt; </button>
       		</form>
 	  	</div>
     	</article>
 	</div>
-  )
+  ) 
 }
