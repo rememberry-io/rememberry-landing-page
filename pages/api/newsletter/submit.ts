@@ -25,19 +25,17 @@ export default async function handler(
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + process.env.ENGINE_MAIL_TOKEN!,
+      "Authorization": "Basic " + btoa(process.env.MAILWHALE_ID! + ":" + process.env.MAILWHALE_SECRET),
     },
     body: JSON.stringify({
-      to: [
-        {
-          address: createdEmail[1]!.email
-        }
-      ],
+      to: [createdEmail[1]!.email],
       subject: "Double Opt-In: Rememberry",
       html: '<a href="' + url + '">' + url + '</a>'
     })
   });
 
+  console.log(data)
+
+
   res.status(201).json(createdEmail[1]);
 }
-
