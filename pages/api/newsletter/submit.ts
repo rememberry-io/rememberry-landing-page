@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { NewsletterClient } from './NewsletterClient';
+import { WaitlistClient } from './NewsletterClient';
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,14 +10,18 @@ export default async function handler(
 
   const email = req.body;
 
-  const newsletterClient = new NewsletterClient();
+  const waitlistClient = new WaitlistClient();
 
-  const createdEmail = await newsletterClient.create(email);
+  const createdEmail = await waitlistClient.create(email);
 
   if (createdEmail[0])
     return res.status(400).json({ error: createdEmail[0] });
 
-  const url = process.env.OPT_IN_URL! + createdEmail[1]!.id ;
+  const verifyEndpoint = "api/newsletter/emails/verify/" 
+  const verifyUrl = process.env.URL! + verifyEndpoint + createdEmail[1]!.id ;
+  
+  const deleteEndpoint = "api/newsletter/emails/delete/" 
+  const deleteUrl = process.env.URL! + deleteEndpoint + createdEmail[1]!.id ;
 
   const emailRelay = process.env.EMAIL_RELAY_URL!;
 
@@ -30,7 +34,7 @@ export default async function handler(
     body: JSON.stringify({
       to: [createdEmail[1]!.email],
       subject: "Double Opt-In: Rememberry",
-      html: '<a href="' + url + '">' + url + '</a>'
+      html: '<a href="' + verifyUrl + '">' + verifyUrl + '</a><br><p>Delete your Waitlist entry:</p><a href="' + deleteUrl + '">' + deleteUrl + '</a>'
     })
   });
 
