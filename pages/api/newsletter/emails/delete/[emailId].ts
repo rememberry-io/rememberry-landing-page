@@ -24,6 +24,6 @@ export default async function handler(
   res
     .status(200)
     .send(
-      '<html><head><meta name="robots" content="noindex,nofollow"></head><body>Your Email was successfully Deleted</body></html>',
+      '<html><head><meta name="robots" content="noindex,nofollow"></head><body><p>Your Email was successfully deleted</p><br><a href="https://rememberry.io">Back to the Home Page</a></body></html>',
     );
 }

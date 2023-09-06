@@ -27,6 +27,6 @@ export default async function handler(
   res
     .status(200)
     .send(
-      '<html><head><meta name="robots" content="noindex,nofollow"></head><body>Thanks for confirming!</body></html>',
+      '<html><head><meta name="robots" content="noindex,nofollow"></head><body><p>Thanks for confirming!</p><br><a href="https://rememberry.io">Back to the Home Page</a></body></html>',
     );
 }

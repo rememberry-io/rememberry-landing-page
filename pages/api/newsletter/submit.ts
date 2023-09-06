@@ -36,7 +36,7 @@ export default async function handler(
       to: [createdEmail[1]!.email],
       subject: "Double Opt-In: Rememberry",
       html:
-        '<a href="' +
+        '<p>Pleas Verify your email:</p><a href="' +
         verifyUrl +
         '">' +
         verifyUrl +
