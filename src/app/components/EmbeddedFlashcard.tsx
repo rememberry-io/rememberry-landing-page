@@ -2,12 +2,10 @@
 import { FormEvent } from "react";
 
 type EmbeddedFlashcardProps = {
-  onFormSubmit: () => void; // type definition for the passed function
-};
+	onSuccessfulSubmit: () => void;
+}
 
-export default function EmbeddedFlashcard({
-  onFormSubmit,
-}: EmbeddedFlashcardProps) {
+export default function EmbeddedFlashcard({ onSuccessfulSubmit }: EmbeddedFlashcardProps) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -20,13 +18,20 @@ export default function EmbeddedFlashcard({
       body: email,
     });
 
-    onFormSubmit();
+	if(response.ok) {
+		console.log("Form submitted");
+		onSuccessfulSubmit();
+	} else {
+		console.error("Submission failed");
+	}
+
   }
+
 
   return (
     <div className="rounded-lg text-center mx-10 shadow-2xl p-12 sm:max-w-[80%] sm:m-auto md:m-auto md:max-w-[60%] xl:max-w-[50%] max-w-2xl">
       <article>
-        <h3 className="font-semibold text-lg sm:text-2xl">
+        <h3 className="text-black font-semibold text-lg sm:text-2xl">
           {" "}
           Join the waitlist 👀
         </h3>
@@ -41,7 +46,7 @@ export default function EmbeddedFlashcard({
           <form onSubmit={onSubmit}>
             <input
               type="email"
-              className="rounded-l border-1 border-b text-xs p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300"
+              className="rounded-l border-1 border-b text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300"
               placeholder="Email address"
               name="email"
             />

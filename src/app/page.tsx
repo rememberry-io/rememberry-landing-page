@@ -5,15 +5,16 @@ import rememberryLogo from "../../public/rememberry-logo.svg";
 import EmbeddedFlashcard from "./components/EmbeddedFlashcard";
 import Link from "next/link";
 import SignupTooltip from "./components/SignupTooltip";
+import ConfirmationWindow from "./components/ConfirmationWindox";
 
 export default function Home() {
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
-  const handleShowTooltip = () => {
-    setShowTooltip(true);
-    setTimeout(() => {
-      setShowTooltip(false);
-    }, 10000);
+  const handleConfirmation = () => {
+	console.log("HandleConfirmation is triggered");
+    setIsConfirmed(true);
+
+    
   };
 
   return (
@@ -21,11 +22,11 @@ export default function Home() {
       <Image
         src={rememberryLogo}
         alt="rememberryLogo"
-        className="text-center m-auto my-20 "
+        className="text-center m-auto my-10"
       />
       <div className="text-center my-8 sm:mb-16">
-        <h1 className="font-semibold mx-16 text-xl sm:text-2xl lg:text-3xl leading-loose">
-          Crafting <span className="text-blue-500">flashcard journeys</span> on
+        <h1 className="text-black font-semibold mx-16 text-xl sm:text-2xl lg:text-3xl leading-loose">
+          Crafting <span className="text-blue-500">flashcard networks</span> on
           the fast lane. 🧠⚡️️
         </h1>
         <br></br>
@@ -41,11 +42,11 @@ export default function Home() {
           :){" "}
         </p>
       </div>
-      <EmbeddedFlashcard onFormSubmit={handleShowTooltip} />
+	  {/* {isConfirmed ? <ConfirmationWindow /> : <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} /> } */}
+	  <ConfirmationWindow />
       <div className="text-center text-zinc-400 font-light lg:mt-10 lg:text-base text-xs mt-8 leading-loose">
         <p>Made with 🫐 in Berlin &lt; 3 </p>
       </div>
-      {showTooltip && <SignupTooltip />}
     </main>
   );
 }
