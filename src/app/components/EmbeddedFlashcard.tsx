@@ -52,7 +52,7 @@ export default function EmbeddedFlashcard({
         		<div className="relative flex items-center">
 					<input
 						type="email"
-						className={`rounded-l border text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none ${hasError ? 'border-red-500' : 'border-b focus:border-blue-300'}`}
+						className={`rounded-l border text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none ${hasError ? 'border-red-500' : 'drop-shadow-md focus:border-blue-300'}`}
 						placeholder="Email address"
 						name="email"
 					/>
