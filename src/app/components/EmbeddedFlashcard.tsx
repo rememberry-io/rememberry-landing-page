@@ -34,7 +34,7 @@ export default function EmbeddedFlashcard({
   }
 
   return (
-    <div className="rounded-lg text-center mx-10 shadow-2xl p-12 sm:max-w-[80%] sm:m-auto md:m-auto md:max-w-[60%] xl:max-w-[50%] max-w-2xl">
+    <div className="max-w-lg mx-10 sm:mx-auto rounded-lg text-center shadow-2xl p-12 sm:max-w-[80%]o">
       <article>
         <h3 className="text-black font-semibold text-lg sm:text-2xl">
           {" "}
