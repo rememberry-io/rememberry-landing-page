@@ -49,19 +49,14 @@ export default function EmbeddedFlashcard({
         <br className="leading-8"></br>
         <div className="relative align-middle">
           <form onSubmit={onSubmit}>
-            <input
-              type="email"
-              className={`rounded-l border-1 ${
-                hasError ? "border-red-500" : "border-b"
-              } text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300`}
-              placeholder="Email address"
-              name="email"
-            />
-            {hasError && (
-              <p className="text-red-500 text-xs mt-1">
-                Your email is already registered
-              </p>
-            )}
+		  <input
+   			type="email"
+			className={`rounded-l ${hasError ? 'border-red-500' : 'border-1 border-b'} text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300`}
+			placeholder="Email address"
+			name="email"
+		/>
+		{hasError && <p className="text-red-500 text-xs mt-1">Your email is already registered</p>}
+
             <button
               className="absolute top-1/2 right-3 transform -translate-y-1/2 py-2 focus:outline-none text-xs text-zinc-400"
               type="submit"
