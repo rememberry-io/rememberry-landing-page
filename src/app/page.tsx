@@ -42,8 +42,7 @@ export default function Home() {
           :){" "}
         </p>
       </div>
-	  {/* {isConfirmed ? <ConfirmationWindow /> : <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} /> } */}
-	  <ConfirmationWindow />
+	  {isConfirmed ? <ConfirmationWindow /> : <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} /> }
       <div className="text-center text-zinc-400 font-light lg:mt-10 lg:text-base text-xs mt-8 leading-loose">
         <p>Made with 🫐 in Berlin &lt; 3 </p>
       </div>
