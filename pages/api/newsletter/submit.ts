@@ -23,6 +23,7 @@ export default async function handler(
   const deleteUrl = process.env.URL! + deleteEndpoint + createdEmail[1]!.id;
 
   const emailRelay = process.env.EMAIL_RELAY_URL!;
+  const template_id = process.env.TEMPLATE_ID!;
 
   const data = await fetch(emailRelay, {
     method: "POST",
@@ -33,18 +34,14 @@ export default async function handler(
         btoa(process.env.MAILWHALE_ID! + ":" + process.env.MAILWHALE_SECRET),
     },
     body: JSON.stringify({
+      from: "rememberry <team@rememberry.io>",
       to: [createdEmail[1]!.email],
-      subject: "Double Opt-In: Rememberry",
-      html:
-        '<p>Pleas Verify your email:</p><a href="' +
-        verifyUrl +
-        '">' +
-        verifyUrl +
-        '</a><br><p>Delete your Waitlist entry:</p><a href="' +
-        deleteUrl +
-        '">' +
-        deleteUrl +
-        "</a>",
+      subject: "Double Opt-In: rememberry",
+      template_id,
+      template_vars: {
+        opt_in_link: verifyUrl,
+        delete_entry: deleteUrl
+      }
     }),
   });
 
