@@ -4,7 +4,6 @@ import Image from "next/image";
 import rememberryLogo from "../../public/rememberry-logo.svg";
 import EmbeddedFlashcard from "./components/EmbeddedFlashcard";
 import Link from "next/link";
-import SignupTooltip from "./components/SignupTooltip";
 import ConfirmationWindow from "./components/ConfirmationWindox";
 
 export default function Home() {
