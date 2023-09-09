@@ -2,11 +2,13 @@
 import React, { FormEvent, useState } from "react";
 
 type EmbeddedFlashcardProps = {
-	onSuccessfulSubmit: () => void;
-}
+  onSuccessfulSubmit: () => void;
+};
 
-export default function EmbeddedFlashcard({ onSuccessfulSubmit }: EmbeddedFlashcardProps) {
-	const [hasError, setHasError] = useState(false);
+export default function EmbeddedFlashcard({
+  onSuccessfulSubmit,
+}: EmbeddedFlashcardProps) {
+  const [hasError, setHasError] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,18 +22,16 @@ export default function EmbeddedFlashcard({ onSuccessfulSubmit }: EmbeddedFlashc
       body: email,
     });
 
-	if(response.ok) {
-		console.log("Form submitted");
-		onSuccessfulSubmit();
-	} else if (response.status === 409){
-		setHasError(true);
-		console.error("Email is already registered");
-	} else {
-		console.error("Submission failed");
-	}
-
+    if (response.ok) {
+      console.log("Form submitted");
+      onSuccessfulSubmit();
+    } else if (response.status === 409) {
+      setHasError(true);
+      console.error("Email is already registered");
+    } else {
+      console.error("Submission failed");
+    }
   }
-
 
   return (
     <div className="rounded-lg text-center mx-10 shadow-2xl p-12 sm:max-w-[80%] sm:m-auto md:m-auto md:max-w-[60%] xl:max-w-[50%] max-w-2xl">
@@ -51,14 +51,21 @@ export default function EmbeddedFlashcard({ onSuccessfulSubmit }: EmbeddedFlashc
           <form onSubmit={onSubmit}>
             <input
               type="email"
-              className={`rounded-l border-1 ${hasError ? 'border-red-500' : 'border-b'} text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300`}
+              className={`rounded-l border-1 ${
+                hasError ? "border-red-500" : "border-b"
+              } text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300`}
               placeholder="Email address"
               name="email"
             />
-			{hasError && <p className="text-red-500 text-xs mt-1">Your email is already registered</p>}
+            {hasError && (
+              <p className="text-red-500 text-xs mt-1">
+                Your email is already registered
+              </p>
+            )}
             <button
               className="absolute top-1/2 right-3 transform -translate-y-1/2 py-2 focus:outline-none text-xs text-zinc-400"
-              type="submit">
+              type="submit"
+            >
               {" "}
               -&gt;{" "}
             </button>

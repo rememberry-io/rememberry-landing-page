@@ -10,10 +10,8 @@ export default function Home() {
   const [isConfirmed, setIsConfirmed] = useState(false);
 
   const handleConfirmation = () => {
-	console.log("HandleConfirmation is triggered");
+    console.log("HandleConfirmation is triggered");
     setIsConfirmed(true);
-
-    
   };
 
   return (
@@ -41,7 +39,11 @@ export default function Home() {
           :){" "}
         </p>
       </div>
-	  {isConfirmed ? <ConfirmationWindow /> : <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} /> }
+      {isConfirmed ? (
+        <ConfirmationWindow />
+      ) : (
+        <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} />
+      )}
       <div className="text-center text-zinc-400 font-light lg:mt-10 lg:text-base text-xs mt-8 leading-loose">
         <p>Made with 🫐 in Berlin &lt; 3 </p>
       </div>
