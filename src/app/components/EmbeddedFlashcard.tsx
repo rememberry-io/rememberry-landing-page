@@ -1,13 +1,15 @@
 "use client";
-import { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 
 type EmbeddedFlashcardProps = {
-  onFormSubmit: () => void; // type definition for the passed function
+  onSuccessfulSubmit: () => void;
 };
 
 export default function EmbeddedFlashcard({
-  onFormSubmit,
+  onSuccessfulSubmit,
 }: EmbeddedFlashcardProps) {
+  const [hasError, setHasError] = useState(false);
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -20,13 +22,21 @@ export default function EmbeddedFlashcard({
       body: email,
     });
 
-    onFormSubmit();
+    if (response.ok) {
+      console.log("Form submitted");
+      onSuccessfulSubmit();
+    } else if (response.status === 409) {
+      setHasError(true);
+      console.error("Email is already registered");
+    } else {
+      console.error("Submission failed");
+    }
   }
 
   return (
-    <div className="rounded-lg text-center mx-10 shadow-2xl p-12 sm:max-w-[80%] sm:m-auto md:m-auto md:max-w-[60%] xl:max-w-[50%] max-w-2xl">
+    <div className="max-w-lg mx-10 sm:mx-auto rounded-lg text-center shadow-2xl p-12 sm:max-w-[80%]o">
       <article>
-        <h3 className="font-semibold text-lg sm:text-2xl">
+        <h3 className="text-black font-semibold text-lg sm:text-2xl">
           {" "}
           Join the waitlist 👀
         </h3>
@@ -38,22 +48,24 @@ export default function EmbeddedFlashcard({
         </p>
         <br className="leading-8"></br>
         <div className="relative align-middle">
-          <form onSubmit={onSubmit}>
-            <input
-              type="email"
-              className="rounded-l border-1 border-b text-xs p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none focus:border-blue-300"
-              placeholder="Email address"
-              name="email"
-            />
-            <button
-              className="absolute top-1/2 right-3 transform -translate-y-1/2 py-2 focus:outline-none text-xs text-zinc-400"
-              type="submit"
-            >
-              {" "}
-              -&gt;{" "}
-            </button>
-          </form>
-        </div>
+    		<form onSubmit={onSubmit}>
+        		<div className="relative flex items-center">
+					<input
+						type="email"
+						className={`rounded-l border text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none ${hasError ? 'border-red-500' : 'drop-shadow-md focus:border-blue-300'}`}
+						placeholder="Email address"
+						name="email"
+					/>
+					<button
+						className="absolute top-1/2 right-3 transform -translate-y-1/2 py-2 focus:outline-none text-xs text-zinc-400"
+						type="submit"
+					>
+						-&gt;
+					</button>
+				{hasError && <p className="text-red-500 text-xs mt-1">Your email is already registered</p>}
+				</div>
+			</form>
+		</div>
       </article>
     </div>
   );

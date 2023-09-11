@@ -14,7 +14,7 @@ export default async function handler(
 
   const createdEmail = await waitlistClient.create(email);
 
-  if (createdEmail[0]) return res.status(400).json({ error: createdEmail[0] });
+  if (createdEmail[0]) return res.status(409).json({ error: createdEmail[0] });
 
   const verifyEndpoint = "api/newsletter/emails/verify/";
   const verifyUrl = process.env.URL! + verifyEndpoint + createdEmail[1]!.id;
@@ -40,8 +40,8 @@ export default async function handler(
       template_id,
       template_vars: {
         opt_in_link: verifyUrl,
-        delete_entry: deleteUrl
-      }
+        delete_entry: deleteUrl,
+      },
     }),
   });
 
