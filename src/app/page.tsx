@@ -32,7 +32,7 @@ export default function Home() {
           click{" "}
           <Link
             href="https://forms.gle/DVBwsM4SSzQTcysSA"
-            className="underline"
+            className="underline text-blue-500"
           >
             here
           </Link>{" "}
