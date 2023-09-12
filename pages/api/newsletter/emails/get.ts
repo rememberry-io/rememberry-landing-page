@@ -5,12 +5,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { emailId } = req.query;
-
-  if (!(typeof emailId === "string" || emailId instanceof String))
-    return res
-      .status(400)
-      .send({ success: true, content: "Please enter correct slug" });
+  const auth = req.headers.authorization;
+  const correctAuth = process.env.AUTH_TOKEN!;
+  if (auth !== correctAuth) 
+    return res.status(401).send({ success: false, content: "error unauthorized"});
 
   const waitlistClient = new WaitlistClient();
 
