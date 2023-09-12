@@ -14,7 +14,7 @@ export class WaitlistClient {
     try {
       const allEntries = await this.db.select().from(emails);
 
-      return [null, allEntries[0]] as const;
+      return [null, allEntries] as const;
     } catch (error) {
       return [error, null] as const;
     }
