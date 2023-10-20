@@ -36,7 +36,7 @@ export default function EmbeddedFlashcard({
   return (
     <div className="max-w-lg mx-10 sm:mx-auto rounded-lg text-center shadow-2xl p-12 sm:max-w-[80%]o">
       <article>
-        <h3 className="text-black font-semibold text-lg sm:text-2xl">
+        <h3 className="text-black font-medium text-lg sm:text-2xl">
           {" "}
           Join the waitlist 👀
         </h3>
@@ -48,25 +48,34 @@ export default function EmbeddedFlashcard({
         </p>
         <br className="leading-8"></br>
         <div className="relative align-middle">
-    		<form onSubmit={onSubmit}>
-				<div className="relative flex flex-col items-stretch">
-    				<div className="flex items-center relative">
-       					 <input
-							type="email"
-							className={`flex-grow rounded-l border text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none ${hasError ? 'border-red-500' : 'drop-shadow-md focus:border-blue-300'}`}
-							placeholder="Email address"
-							name="email"
-        				/>
-        				<button
-							className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none text-xs text-zinc-400"
-							type="submit">
-							-&gt;
-						</button>
-					</div>
-					{hasError && <p className="text-red-500 text-xs mt-1">Your email is already registered</p>}
-				</div>
-			</form>
-		</div>
+          <form onSubmit={onSubmit}>
+            <div className="relative flex flex-col items-stretch">
+              <div className="flex items-center relative">
+                <input
+                  type="email"
+                  className={`flex-grow rounded-l border text-xs text-black p-2 rounded-md pl-3 pr-8 py-2 w-full focus:outline-none ${
+                    hasError
+                      ? "border-red-500"
+                      : "drop-shadow-md focus:border-blue-300"
+                  }`}
+                  placeholder="Email address"
+                  name="email"
+                />
+                <button
+                  className="absolute top-1/2 right-3 transform -translate-y-1/2 focus:outline-none text-xs text-zinc-400"
+                  type="submit"
+                >
+                  -&gt;
+                </button>
+              </div>
+              {hasError && (
+                <p className="text-red-500 text-xs mt-1">
+                  Your email is already registered
+                </p>
+              )}
+            </div>
+          </form>
+        </div>
       </article>
     </div>
   );

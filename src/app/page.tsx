@@ -22,7 +22,7 @@ export default function Home() {
         className="text-center m-auto my-10"
       />
       <div className="text-center my-8 sm:mb-16">
-        <h1 className="text-black font-semibold mx-16 text-xl sm:text-2xl leading-loose">
+        <h1 className="text-black font-medium mx-16 text-xl sm:text-2xl leading-loose">
           Crafting <span className="text-blue-500">flashcard networks</span> on
           the fast lane. 🧠⚡️️
         </h1>
@@ -45,7 +45,7 @@ export default function Home() {
         <EmbeddedFlashcard onSuccessfulSubmit={handleConfirmation} />
       )}
       <div className="text-center text-zinc-400 font-light lg:mt-10 lg:text-base text-xs mt-8 leading-loose">
-        <p>Made with 🫐 in Berlin &lt; 3 </p>
+        <p>Made with 🫐 in Berlin &lt;3 </p>
       </div>
     </main>
   );
